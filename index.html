@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтерактивний робочий аркуш ЛПР №2 — Кар'єра в бізнесі</title>
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --navy-blue: #0f172a;
+            --beige-bg: #fdfbf7;
+            --card-bg: #ffffff;
+            --border-color: #cbd5e1;
+            --accent-amber: #d97706;
+            --danger-red: #dc2626;
+            --success-green: #16a34a;
+            --text-dark: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--beige-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        header {
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .subject-tag {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent-amber);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        h1 {
+            color: var(--primary-blue);
+            font-size: 22px;
+            margin: 5px 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        .student-info-panel {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1fr;
+            gap: 15px;
+            background-color: #f8fafc;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .input-group input, .input-group textarea {
+            padding: 8px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+            background-color: #ffffff;
+            font-family: inherit;
+        }
+
+        .input-group input:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.1);
+        }
+
+        .instruction-box {
+            background-color: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-left: 4px solid var(--accent-amber);
+            padding: 12px 15px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 25px;
+            font-size: 13px;
+        }
+
+        .section-header {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .exercise-block {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--primary-blue);
+        }
+
+        .radio-option {
+            display: block;
+            margin-bottom: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            resize: vertical;
+            min-height: 75px;
+        }
+
+        .swot-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .swot-box {
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .swot-box.s { background-color: #f0fdf4; border-color: #bbf7d0; }
+        .swot-box.w { background-color: #fef2f2; border-color: #fecaca; }
+        .swot-box.o { background-color: #eff6ff; border-color: #bfdbfe; }
+        .swot-box.t { background-color: #fffbeb; border-color: #fde68a; }
+
+        .swot-box h4 {
+            margin: 0 0 6px 0;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .submission-bar {
+            position: sticky;
+            bottom: 20px;
+            background: #ffffff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 2px solid var(--primary-blue);
+            margin-top: 30px;
+        }
+
+        .progress-container {
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+
+        .progress-bar-bg {
+            background-color: #e2e8f0;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-bar-fill {
+            background-color: var(--accent-amber);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .status-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--danger-red);
+        }
+
+        .btn-submit {
+            background-color: #94a3b8;
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: not-allowed;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+
+        .btn-submit.active {
+            background-color: var(--success-green);
+            cursor: pointer;
+        }
+
+        .required-star {
+            color: var(--danger-red);
+        }
+
+        @media print {
+            body { padding: 0; background: white; }
+            .container { box-shadow: none; border: none; padding: 0; width: 100%; }
+            .submission-bar { display: none; }
+            textarea { border: 1px solid #94a3b8; resize: none; }
+            .track-input { border: 1px solid #94a3b8; }
+        }
+
+        @media (max-width: 640px) {
+            .student-info-panel, .swot-grid { grid-template-columns: 1fr; }
+            .submission-bar { flex-direction: column; gap: 10px; }
+            .progress-container { width: 100%; margin-right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <p class="subject-tag">Навчальний предмет: Кар'єра в бізнесі</p>
+        <h1>ІНТЕРАКТИВНИЙ РОБОЧИЙ АРКУШ</h1>
+        <h2 style="font-size: 16px; margin: 0; color: var(--navy-blue);">Лабораторно-практична робота №2</h2>
+        <p style="margin: 5px 0 0 0; font-size: 14px;"><strong>Тема:</strong> Особистість як основна складова формули успіху підприємця</p>
+    </header>
+
+    <!-- Інформація про студента -->
+    <div class="student-info-panel">
+        <div class="input-group">
+            <label for="student-name">ПІБ Студента <span class="required-star">*</span></label>
+            <input type="text" id="student-name" class="track-input" placeholder="Прізвище, ім'я, по батькові">
+        </div>
+        <div class="input-group">
+            <label for="student-group">Група / Спеціальність <span class="required-star">*</span></label>
+            <input type="text" id="student-group" class="track-input" placeholder="Наприклад: СТО-21">
+        </div>
+        <div class="input-group">
+            <label for="student-date">Дата виконання <span class="required-star">*</span></label>
+            <input type="date" id="student-date" class="track-input">
+        </div>
+    </div>
+
+    <!-- Інструкція -->
+    <div class="instruction-box">
+        <strong>⚠️ Інструкція виконання та здачі роботи:</strong>
+        <p style="margin: 4px 0 0 0;">Опрацюйте послідовно всі завдання. Всі поля є обов'язковими. Кнопка <strong>«Здати роботу / Зберегти у PDF»</strong> заблокована і стане активною <strong>ЛИШЕ після якісного та повного заповнення</strong> всіх вибраних відповідей, текстових пояснень та підсумкового висновку.</p>
+    </div>
+
+    <!-- ВПРАВА 1 -->
+    <div class="section-header">Вправа 1: "Мій Локус Контролю в Майстерні"</div>
+    <div class="exercise-block">
+        <p style="font-size: 13px; margin-top: 0;"><strong>Мета:</strong> Розрізнити проактивне мислення (внутрішній локус) від реактивного (зовнішній локус).</p>
+        <p style="font-size: 12px; color: #475569;"><em>Прочитайте наступні ситуації та виберіть ту відповідь, яка відображає підприємницький, проактивний підхід:</em></p>
+
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Ситуація</th>
+                        <th style="width: 33%;">Варіант А (Зовнішній Локус)</th>
+                        <th style="width: 33%;">Варіант Б (Внутрішній Локус / Проактивність)</th>
+                        <th style="width: 9%; text-align: center;">Вибір <span class="required-star">*</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Зірвані терміни ремонту.</strong></td>
+                        <td>"Я не винен, постачальник підвів із запчастинами. Це завжди так."</td>
+                        <td>"Я повинен був замовити запчастини раніше або знайти альтернативного постачальника. Як я компенсую клієнту незручності?"</td>
+                        <td style="text-align: center;">
+                            <label class="radio-option"><input type="radio" name="q1" value="A" class="track-input"> А</label>
+                            <label class="radio-option"><input type="radio" name="q1" value="B" class="track-input"> Б</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Клієнт просить знижку.</strong></td>
+                        <td>"Не можу дати знижку, бо мені не вистачить на зарплату. Економіка погана."</td>
+                        <td>"Я не можу знизити якість. Замість знижки я запропоную безкоштовну діагностику або гарантію на 3 місяці, щоб підвищити цінність послуги."</td>
+                        <td style="text-align: center;">
+                            <label class="radio-option"><input type="radio" name="q2" value="A" class="track-input"> А</label>
+                            <label class="radio-option"><input type="radio" name="q2" value="B" class="track-input"> Б</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Поява нової, складної техніки.</strong></td>
+                        <td>"Ці нові трактори занадто складні для ремонту, краще працювати зі старими моделями."</td>
+                        <td>"Це моя можливість. Я інвестую в навчання та інструменти, щоб стати єдиним фахівцем у районі, який це ремонтує."</td>
+                        <td style="text-align: center;">
+                            <label class="radio-option"><input type="radio" name="q3" value="A" class="track-input"> А</label>
+                            <label class="radio-option"><input type="radio" name="q3" value="B" class="track-input"> Б</label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="input-group">
+            <label for="ex1-analysis">Обов'язкове аналітичне обґрунтування <span class="required-star">*</span></label>
+            <p style="font-size: 11px; color: #64748b; margin: 0 0 4px 0;">Дайте відповідь: Чому відповідь Б веде до довгострокового успіху в бізнесі? З'ясуйте, чи часто студенти схиляються до зовнішнього локусу у стресових ситуаціях.</p>
+            <textarea id="ex1-analysis" class="track-input" placeholder="Напишіть своє аналітичне обґрунтування..."></textarea>
+        </div>
+    </div>
+
+    <!-- ВПРАВА 2 -->
+    <div class="section-header">Вправа 2: Кейс-Аналіз "Несподіваний Поворот для Слюсаря"</div>
+    <div class="exercise-block">
+        <p style="font-size: 13px; margin-top: 0;"><strong>Мета:</strong> Розвиток гнучкості (адаптивності) та стійкості перед непередбачуваними обставинами.</p>
+        <div style="background-color: #f8fafc; padding: 12px; border: 1px solid var(--border-color); border-left: 3px solid var(--primary-blue); margin-bottom: 15px; font-size: 12px;">
+            <strong>Сценарій:</strong> Ви відкрили власну невелику СТО. Ваш бізнес-план ґрунтувався на ремонті старих дизельних мікроавтобусів (ваша спеціалізація). Однак, після двох років роботи, місцева влада запроваджує екологічні обмеження на в’їзд старих дизельних авто в центр міста. Клієнти, які становили 80% вашого доходу, почали швидко переходити на новіші гібридні та електричні фургони.
+        </div>
+
+        <div class="input-group" style="margin-bottom: 15px;">
+            <label for="ex2-q1">1. Реакція (Стійкість) <span class="required-star">*</span></label>
+            <p style="font-size: 11px; color: #64748b; margin: 0 0 4px 0;">Як ви будете боротися з першим імпульсом (злість, звинувачення влади, паніка)? Які особистісні якості допоможуть вам не здатися?</p>
+            <textarea id="ex2-q1" class="track-input" placeholder="Опишіть власні дії щодо боротьби зі стресом..."></textarea>
+        </div>
+
+        <div class="input-group" style="margin-bottom: 15px;">
+            <label for="ex2-q2">2. Адаптація (Гнучкість) <span class="required-star">*</span></label>
+            <p style="font-size: 11px; color: #64748b; margin: 0 0 4px 0;">Які три проактивні кроки, не пов'язані з продажем СТО, ви зробите, щоб адаптувати свій бізнес до нових умов?</p>
+            <textarea id="ex2-q2" class="track-input" placeholder="Вкажіть та деталізуйте 3 проактивні кроки..."></textarea>
+        </div>
+
+        <div class="input-group">
+            <label for="ex2-q3">3. Фінансове мислення (Проактивність) <span class="required-star">*</span></label>
+            <p style="font-size: 11px; color: #64748b; margin: 0 0 4px 0;">Як ви використаєте цю кризу як можливість? (Наприклад: стати першим, хто освоїть ремонт нових електричних фургонів у вашому районі).</p>
+            <textarea id="ex2-q3" class="track-input" placeholder="Поясніть, як перетворити проблему на нові можливості..."></textarea>
+        </div>
+    </div>
+
+    <!-- ВПРАВА 3 -->
+    <div class="section-header">Вправа 3: "Мій SWOT-Аналіз Особистості"</div>
+    <div class="exercise-block">
+        <p style="font-size: 13px; margin-top: 0;"><strong>Мета:</strong> Глибокий самоаналіз власних особистісних якостей для їх стратегічного використання у бізнесі.</p>
+        <p style="color: var(--danger-red); font-size: 11px; font-weight: 700; margin-bottom: 10px;">⚠️ ВИМОГА: Заповніть матрицю ВИНЯТКОВО щодо своїх особистісних рис та характеру (а не технічних навичок).</p>
+
+        <div class="swot-grid">
+            <div class="swot-box s">
+                <h4>S (Сильні сторони) <span class="required-star">*</span></h4>
+                <p style="font-size: 11px; color: #475569; margin-bottom: 6px;">Особистісні якості, що дають перевагу (наприклад: чесність, дотримання слова, терплячість).</p>
+                <textarea id="swot-s" class="track-input" placeholder="Ваші сильні риси характеру..."></textarea>
+            </div>
+
+            <div class="swot-box w">
+                <h4>W (Слабкі сторони) <span class="required-star">*</span></h4>
+                <p style="font-size: 11px; color: #475569; margin-bottom: 6px;">Особистісні риси, що можуть завадити (наприклад: боязнь ризику, неуважність, поспіх).</p>
+                <textarea id="swot-w" class="track-input" placeholder="Ваші слабкі риси характеру..."></textarea>
+            </div>
+
+            <div class="swot-box o">
+                <h4>O (Можливості для розвитку) <span class="required-star">*</span></h4>
+                <p style="font-size: 11px; color: #475569; margin-bottom: 6px;">Фактори, які допоможуть посилити слабкі сторони (наприклад: курси, менторство, тренінги).</p>
+                <textarea id="swot-o" class="track-input" placeholder="Шляхи саморозвитку та покращення..."></textarea>
+            </div>
+
+            <div class="swot-box t">
+                <h4>T (Загрози з боку особистості) <span class="required-star">*</span></h4>
+                <p style="font-size: 11px; color: #475569; margin-bottom: 6px;">Внутрішні фактори, що можуть "зруйнувати" бізнес (наприклад: вигорання, імпульсивні витрати).</p>
+                <textarea id="swot-t" class="track-input" placeholder="Внутрішні ризики та загрози..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАГАЛЬНИЙ ВИСНОВОК -->
+    <div class="section-header">Підсумковий блок</div>
+    <div class="exercise-block">
+        <div class="input-group">
+            <label for="final-conclusion">Загальний висновок за результатами лабораторно-практичної роботи <span class="required-star">*</span></label>
+            <p style="font-size: 11px; color: #64748b; margin: 0 0 4px 0;">Узагальніть роль особистісних якостей, локусу контролю та адаптивності у формуванні успішної кар'єри підприємця.</p>
+            <textarea id="final-conclusion" class="track-input" placeholder="Сформулюйте підсумковий висновок..."></textarea>
+        </div>
+    </div>
+
+    <!-- ПАНЕЛЬ ЗДАЧІ -->
+    <div class="submission-bar">
+        <div class="progress-container">
+            <div><strong>Заповнення роботи:</strong> <span id="progress-percent">0%</span></div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-bar"></div>
+            </div>
+            <div class="status-text" id="status-text">Заповніть усі обов'язкові поля для здачі!</div>
+        </div>
+        <button type="button" class="btn-submit" id="submit-btn" disabled onclick="submitWork()">Здати роботу / Зберегти у PDF</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const inputs = document.querySelectorAll('.track-input');
+        const submitBtn = document.getElementById('submit-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const progressPercent = document.getElementById('progress-percent');
+        const statusText = document.getElementById('status-text');
+
+        const MIN_TEXT_LENGTH = 15; // Мінімальна кількість символів для якісної відповіді
+
+        function checkValidation() {
+            let totalFields = 13;
+            let completedFields = 0;
+
+            // Ідентифікація
+            const name = document.getElementById('student-name').value.trim();
+            const group = document.getElementById('student-group').value.trim();
+            const date = document.getElementById('student-date').value.trim();
+
+            if (name.length >= 3) completedFields++;
+            if (group.length >= 2) completedFields++;
+            if (date !== '') completedFields++;
+
+            // Перемикачі
+            ['q1', 'q2', 'q3'].forEach(qName => {
+                if (document.querySelector(`input[name="${qName}"]:checked`)) {
+                    completedFields++;
+                }
+            });
+
+            // Текстові поля
+            const textFields = [
+                'ex1-analysis',
+                'ex2-q1', 'ex2-q2', 'ex2-q3',
+                'swot-s', 'swot-w', 'swot-o', 'swot-t',
+                'final-conclusion'
+            ];
+
+            textFields.forEach(id => {
+                const val = document.getElementById(id).value.trim();
+                if (val.length >= MIN_TEXT_LENGTH) {
+                    completedFields++;
+                }
+            });
+
+            const percentage = Math.round((completedFields / totalFields) * 100);
+            progressBar.style.width = percentage + '%';
+            progressPercent.innerText = percentage + '%';
+
+            if (completedFields === totalFields) {
+                submitBtn.classList.add('active');
+                submitBtn.disabled = false;
+                statusText.style.color = 'var(--success-green)';
+                statusText.innerText = 'Роботу повністю заповнено! Можна здійснювати здачу.';
+            } else {
+                submitBtn.classList.remove('active');
+                submitBtn.disabled = true;
+                statusText.style.color = 'var(--danger-red)';
+                statusText.innerText = `Не заповнено поля (Завершено ${completedFields} з ${totalFields}).`;
+            }
+        }
+
+        inputs.forEach(element => {
+            element.addEventListener('input', checkValidation);
+            element.addEventListener('change', checkValidation);
+        });
+    });
+
+    function submitWork() {
+        const studentName = document.getElementById('student-name').value;
+        alert(`Вітаємо, ${studentName}! Лабораторно-практичну роботу №2 з предмета "Кар'єра в бізнесі" успішно заповнено.\n\nЗараз відкриється діалогове вікно для збереження файлу в PDF або друку.`);
+        window.print();
+    }
+</script>
+
+</body>
+</html>
